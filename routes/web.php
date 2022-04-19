@@ -3,10 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\registrocontroller;
 use App\Http\Controllers\sesioncontroller;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
+
+
 
 Route::get('/', function () {
     return view('home');
-})->middleware('auth');
+})->middleware(['auth', 'verified']);
 
 Route::get('/registro', [registrocontroller::class, 'create'])
 ->middleware('guest')
@@ -21,4 +25,6 @@ Route::post('/login', [sesioncontroller::class, 'store'])
 Route::get('/logout', [sesioncontroller::class, 'destroy'])
 ->middleware('auth')
 ->name('login.destroy');
+
+
 
